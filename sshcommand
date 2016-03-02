@@ -6,7 +6,7 @@ shopt -s nocasematch #For case insensitive string matching, for the first parame
 OSRELEASE=/etc/os-release
 
 f_print_os_name() {
-  sed -n 's#^NAME="\(.*\)"#\1#p' $OSRELEASE
+  sed -n 's#^ID_LIKE="\(.*\)"#\1#p' $OSRELEASE
   return 0
 }
 
@@ -16,7 +16,7 @@ f_adduser() {
   l_user=$1
   l_platform="$(f_print_os_name)"
   case $l_platform in
-    Debian*|Ubuntu)
+    debian)
       adduser --disabled-password --gecos "" "$l_user"
       ;;
     *)
